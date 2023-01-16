@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/test', [RoleController::class, 'test']);
+// Route::get('/test', [RoleController::class, 'test']);
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::resource('roles', RolesController::class,);
+});
