@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -26,8 +28,17 @@ class RolesController extends Controller
      */
     public function create()
     {
-        $premission = Permission::all();
-        return view('backend.pages.roles.create', compact('premission'));
+        // $permission_group = DB::table('permissions')
+        //     ->select('group_name')
+        //     ->groupBy('group_name')
+        //     ->get();
+        // dd($permission_group);
+
+        //getPermissionGroup is a static function which we  declare in User Model and it's access from anywhere
+        $PermissionGroup = User::getPermissionGroup();
+        dd($PermissionGroup);
+        $permission = Permission::all();
+        return view('backend.pages.roles.create', compact('permission', 'PermissionGroup'));
     }
 
     /**
