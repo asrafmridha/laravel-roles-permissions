@@ -29,15 +29,21 @@
                         </div>
                         @include('backend.partial.message')
                     <div class="modal-body">
-                        {{-- @error('name')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror --}}
+                   
                         <input type="text" name="name" class="form-control" placeholder="Role">
-                    @foreach ($premission as $premission)
+                          <br><br>
+                          <h5>Permissions</h5>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="checkPermissionAll" checked>
+                            <label class="form-check-label" for="flexCheckChecked">
+                                All
+                            </label>
+                        </div>
+                    @foreach ($permission as $permission)
                         <div class="form-check mt-3">
                             <label class="ckbox">
-                                <input type="checkbox" id="permissionCheck" value=" {{ $premission->id }}" name="permissions[]">
-                                <span>{{ $premission->name }}</span>
+                                <input type="checkbox" id="permissionCheck{{ $permission->id }}" value=" {{ $permission->id }}" name="permissions[]">
+                                <span>{{ $permission->name }}</span>
                             </label>
                         </div>
                     @endforeach    
@@ -52,6 +58,22 @@
         </div>
 @endsection
 
-@section('js')
 
-@endsection
+@section('js')
+    <script>
+        $(document).ready(function(){
+             $('#checkPermissionAll').click(function(){
+                 if($(this).is(':checked')){
+                    //Check All the CheckBox
+                    $('input[type=checkbox]').prop('checked',true);
+                }else{
+                    //UnCheck All the CheckBox
+                    $('input[type=checkbox]').prop('checked',false);
+                };
+            });
+           
+        });
+    </script>
+@endsection    
+
+
