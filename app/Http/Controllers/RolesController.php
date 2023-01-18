@@ -40,7 +40,9 @@ class RolesController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|max:100|unique:roles'
+        ], [
+            'name.required' => 'Please Give a Name First',
         ]);
         $role = Role::create(['name' => $request->name]);
         $permissions = $request->permissions;

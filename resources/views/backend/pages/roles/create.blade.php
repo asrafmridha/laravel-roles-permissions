@@ -27,7 +27,11 @@
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Create Role</h5>
                         </div>
+                        @include('backend.partial.message')
                     <div class="modal-body">
+                        {{-- @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror --}}
                         <input type="text" name="name" class="form-control" placeholder="Role">
                     @foreach ($premission as $premission)
                         <div class="form-check mt-3">
@@ -46,4 +50,8 @@
                     </div>
                 </form>
         </div>
+@endsection
+
+@section('js')
+
 @endsection
