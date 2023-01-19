@@ -36,7 +36,6 @@ class RolesController extends Controller
 
         //getPermissionGroup is a static function which we  declare in User Model and it's access from anywhere
         $PermissionGroup = User::getPermissionGroup();
-        dd($PermissionGroup);
         $permission = Permission::all();
         return view('backend.pages.roles.create', compact('permission', 'PermissionGroup'));
     }
