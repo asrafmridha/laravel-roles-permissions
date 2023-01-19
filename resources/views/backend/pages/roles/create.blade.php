@@ -74,7 +74,7 @@
                                             @endforeach 
                                         </div>
                                     </div>
-                                       {{-- @php  $i++; @endphp  --}}
+                                       @php  $i++; @endphp 
                                 @endforeach
 
                                 {{-- @foreach ($permission as $permission)
@@ -109,7 +109,21 @@
                     $('input[type=checkbox]').prop('checked',false);
                 };
             });
-           
         });
+
+       function checkPermissionByGroup(className,checkThis){
+
+            const groupIdName=$('#'+checkThis.id);
+            const classCheckBox=$('.'+className+' input');
+                 if(groupIdName.is(':checked')){
+                    //Check All Groupwise  CheckBox
+                    classCheckBox.prop('checked',true);
+                }else{
+                    //UnCheck All the Groupwise Uncheck
+                    classCheckBox.prop('checked',false);
+                };    
+       }
+
+
     </script>
 @endsection    
