@@ -21,7 +21,9 @@
                 @if(Session::has('success'))
                     <p class="alert alert-info">{{ Session::get('success') }}</p>
                 @endif
-                <form action="{{ route('roles.store') }}" method="POST">
+                <form action="{{ route('roles.update',$role->id) }}" method="POST">
+                    @method('PUT')
+
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -44,21 +46,19 @@
                                 @endphp
 
                                 @foreach ($PermissionGroup as $group)
+                                    @php
+                                        $permission=DB::table('permissions')->where('group_name',$group->name)->get();
+                                    @endphp
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="{{ $i }}Management" value="{{ $group->name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)">
+                                                <input type="checkbox" class="form-check-input" id="{{ $i }}Management" value="{{ $group->name }}" onclick="checkPermissionByGroup('role-{{ $i }}-management-checkbox', this)" {{ App\Models\User::roleHasPermission($role ,$permission) ? 'checked' : '' }} >
                                                 <label class="form-check-label" for="checkPermission">{{ $group->name }}</label>
                                             </div>
 
                                         </div>
                                         <div class="col-md-9 role-{{ $i }}-management-checkbox">
-                                            @php
-                                              $permission=DB::table('permissions')->where('group_name',$group->name)->get();
-                                              
-                                            // $permission = App\Models\User::getPermissionGroup($group->name);
-                                            //  $j = 1;
-                                            @endphp
+                                            
                                             @foreach ($permission as $permission)
 
                                                 <div class="form-check mt-3">
@@ -89,7 +89,7 @@
                     </div>
                   
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                     </div>
                 </form>
