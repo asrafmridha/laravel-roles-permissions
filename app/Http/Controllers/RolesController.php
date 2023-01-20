@@ -97,7 +97,18 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:100'
+        ], [
+            'name.required' => 'Please Give a Name First',
+        ]);
+        $role = Role::findById($id);
+        $permissions = $request->permissions;
+
+        if (!empty($permissions)) {
+            $role->syncPermissions($permissions);
+        }
+        return back()->withSuccess('Roles Updated Successfully');
     }
 
     /**
