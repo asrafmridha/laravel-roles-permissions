@@ -82,7 +82,10 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findById($id);
+        $PermissionGroup = User::getPermissionGroup();
+        $permission = Permission::all();
+        return view('backend.pages.roles.edit', compact('permission', 'PermissionGroup', 'role'));
     }
 
     /**
