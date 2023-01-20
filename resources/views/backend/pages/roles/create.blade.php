@@ -25,7 +25,7 @@
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create Role</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Role</h5>
                         </div>
                         @include('backend.partial.message')
                         <div class="modal-body">
@@ -34,7 +34,7 @@
                             <br><br>
                             <h5>Permissions</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkPermissionAll" checked>
+                                <input class="form-check-input" type="checkbox" value="" id="checkPermissionAll">
                                 <label class="form-check-label" for="flexCheckChecked">
                                     All
                                 </label>
@@ -98,32 +98,5 @@
 
 
 @section('js')
-    <script>
-        $(document).ready(function(){
-             $('#checkPermissionAll').click(function(){
-                 if($(this).is(':checked')){
-                    //Check All the CheckBox
-                    $('input[type=checkbox]').prop('checked',true);
-                }else{
-                    //UnCheck All the CheckBox
-                    $('input[type=checkbox]').prop('checked',false);
-                };
-            });
-        });
-
-       function checkPermissionByGroup(className,checkThis){
-
-            const groupIdName=$('#'+checkThis.id);
-            const classCheckBox=$('.'+className+' input');
-                 if(groupIdName.is(':checked')){
-                    //Check All Groupwise  CheckBox
-                    classCheckBox.prop('checked',true);
-                }else{
-                    //UnCheck All the Groupwise Uncheck
-                    classCheckBox.prop('checked',false);
-                };    
-       }
-
-
-    </script>
+    @include('backend.partial.script')
 @endsection    

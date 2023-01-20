@@ -39,10 +39,11 @@
                         </thead>
                         <tbody>
                             @foreach ($role as $role)
+                            
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td> {{ $role->name }}</td>
-                                <td> <button class="btn btn-primary">Edit</button>
+                                <td> <a href="{{ route('roles.edit',$role->id) }}" class="btn btn-primary">Edit</a>
                                 <button class="btn btn-danger">Delete</button>
                                 
                                 </td>
