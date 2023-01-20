@@ -48,6 +48,7 @@
                                 @foreach ($PermissionGroup as $group)
                                     @php
                                         $permission=DB::table('permissions')->where('group_name',$group->name)->get();
+                                        $permissionGroupCheck=DB::table('permissions')->where('group_name',$group->name)->get();
                                     @endphp
                                     <div class="row">
                                         <div class="col-md-3">
@@ -60,11 +61,20 @@
                                         <div class="col-md-9 role-{{ $i }}-management-checkbox">
                                             
                                             @foreach ($permission as $permission)
+                                            {{-- @php
+                                                dd( is_array($permission) ? count($permission) : 0);
+                                            @endphp --}}
 
                                                 <div class="form-check mt-3">
                                                     <label class="ckbox">
                                                         <input type="checkbox"
-                                                        id="permissionCheck{{ $permission->name }}" value=" {{ $permission->id }}" name="permissions[]" 
+                                                        id="permissionCheck{{ $permission->name }}"
+
+                                                       onclick="checkSinglePermission('role-{{ $i }}-management-checkbox', '{{ $i }}Management', {{ count($permissionGroupCheck) }})"
+
+
+
+                                                        value=" {{ $permission->id }}" name="permissions[]" 
                                                          {{ $role->hasPermissionTO($permission->name) ? 'checked' : '' }}
                                                         >
                                                         <span>{{ $permission->name }}</span>
