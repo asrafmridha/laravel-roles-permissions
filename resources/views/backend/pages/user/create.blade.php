@@ -1,5 +1,7 @@
 @extends('dashboard')
-
+@section('usercreate')
+    active
+@endsection
 @section('breadcrumb')
     <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
     <div class="breadcrumb-wrapper">
@@ -21,7 +23,8 @@
                 @if(Session::has('success'))
                     <p class="alert alert-info">{{ Session::get('success') }}</p>
                 @endif
-                <form action="{{ route('roles.store') }}" method="POST">
+                @include('backend.partial.message')
+                <form action="{{ route('users.store') }}" method="POST">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6 col-sm-12 ">
@@ -40,7 +43,7 @@
                         </div>
                         <div class="form-group col-md-6 col-sm-12 ">
                             <label class="label h6" for="name">Confirm Password</label>
-                            <input type="password" class="form-control" name="confirm_password" placeholder="Enter Confirm Password">
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Enter Confirm Password">
                         </div>
                     </div>
 
@@ -57,7 +60,7 @@
                     </div>
                    
                   
-                    <div class="modal-footer">
+                    <div class="modal-footer form-group">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                     </div>
