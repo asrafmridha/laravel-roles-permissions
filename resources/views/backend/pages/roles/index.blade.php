@@ -53,8 +53,11 @@
                                     @endforeach
                                 </td>
                                 <td> <a href="{{ route('roles.edit',$role->id) }}" class="btn btn-primary">Edit</a>
-                                <button class="btn btn-danger">Delete</button>
-                                
+                                <form class="form-group" action="{{ route('roles.destroy',$role->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button  type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                                 </td>
                             </tr>
                             @endforeach

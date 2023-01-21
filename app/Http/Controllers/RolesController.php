@@ -35,7 +35,7 @@ class RolesController extends Controller
         // dd($permission_group);
 
         //getPermissionGroup is a static function which we  declare in User Model and it's access from anywhere
-        
+
         $PermissionGroup = User::getPermissionGroup();
         $permission = Permission::all();
         return view('backend.pages.roles.create', compact('permission', 'PermissionGroup'));
@@ -120,6 +120,7 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::findById($id)->delete();
+        return back()->withSuccess('Roles Deleted Successfully');
     }
 }
