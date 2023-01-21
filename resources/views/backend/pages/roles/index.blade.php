@@ -34,6 +34,7 @@
                             <tr>
                                 <th>sl</th>
                                 <th> Name</th>
+                                <th width="400px" >Permission</th>
                                 <th> Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,14 @@
                             <tr>
                                 <td>{{ $loop->index+1 }}</td>
                                 <td> {{ $role->name }}</td>
+                                <td>
+
+                                    @foreach ($role->permissions as $item)
+                                       <span class="badge badge-info mr-1">
+                                        {{ $item->name }}
+                                       </span>
+                                    @endforeach
+                                </td>
                                 <td> <a href="{{ route('roles.edit',$role->id) }}" class="btn btn-primary">Edit</a>
                                 <button class="btn btn-danger">Delete</button>
                                 
