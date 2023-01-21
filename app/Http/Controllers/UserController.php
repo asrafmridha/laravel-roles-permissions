@@ -39,6 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
 
             'name'      => 'required|max:50',
@@ -52,6 +53,10 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->save();
+
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
         return back()->with('success', 'User Created Successfully');
     }
 
