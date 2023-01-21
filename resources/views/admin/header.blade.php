@@ -164,7 +164,14 @@
                 <li><a href=""><i class="icon ion-ios-download"></i> Downloads</a></li>
                 <li><a href=""><i class="icon ion-ios-star"></i> Favorites</a></li>
                 <li><a href=""><i class="icon ion-ios-folder"></i> Collections</a></li>
-                <li><a href=""><i class="icon ion-power"></i> Sign Out</a></li>
+                <li>
+                  <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                  <button type="submit" class="btn"><i class="icon ion-power"></i> Sign Out</button>
+
+                  </form>
+                
+                </li>
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
