@@ -79,9 +79,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::findById($id);
+
+        $user = User::find($id);
         $roles = Role::all();
-        return view('backend.pages.user.edit', compact('users', 'roles'));
+        return view('backend.pages.user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -93,7 +94,25 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:users,id', $id,
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->roles()->detach();
+        if ($request->roles) {
+            $user->assignRole($request->roles);
+        }
+
+        return back()->withSuccess('User Updated Successfully');
     }
 
     /**
