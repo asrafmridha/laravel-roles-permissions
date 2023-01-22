@@ -123,7 +123,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::findById($id)->delete();
+        User::find($id)->delete();
         return back()->withSuccess('Deleted Successfully');
     }
 }
