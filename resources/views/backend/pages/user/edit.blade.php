@@ -25,6 +25,7 @@
                 @endif
                 @include('backend.partial.message')
                 <form action="{{ route('users.update',$user->id) }}" method="POST">
+                    @method('PUT')
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6 col-sm-12 ">
@@ -49,7 +50,7 @@
 
                     
                       
-                          <div class="form-row">
+                        <div class="form-row">
                             <div class="form-group ">
                                 <label for="password">Assign Roles</label>
                                 <select name="roles[]" id="roles" class="form-control select2" multiple>
@@ -58,13 +59,10 @@
                                     @endforeach
                                 </select>
                             </div>
+                        </div>     
+                        <div class="modal-footer form-group">
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
-                 
-                   
-                  
-                    <div class="modal-footer form-group">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
                     </div>
                 </form>
         </div>
